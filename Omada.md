@@ -7,7 +7,7 @@ The Omada Controller is the software needed for managing some of TP-Link's netwo
     version: '3'
 
     services:
-    omada:
+      omada:
         container_name: omada
         restart: unless-stopped
         image: "mbentley/omada-controller:latest"
@@ -50,7 +50,7 @@ The Omada Controller is the software needed for managing some of TP-Link's netwo
         - "traefik.http.middlewares.omada-redirect.redirectregex.replacement=https://$$1/login"
 
     volumes:
-    omada-logs:
+      omada-logs:
 
 Some things to note in this example:
 
