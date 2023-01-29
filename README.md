@@ -78,3 +78,4 @@ Give Traefik a minute to get a certificate and set up routes. Then go to `https:
 ## Container examples
 
  * [Portainer](Portainer.md)
+ * [Omada](Omada.md)
