@@ -79,3 +79,4 @@ Give Traefik a minute to get a certificate and set up routes. Then go to `https:
 
  * [Portainer](Portainer.md)
  * [Omada](Omada.md)
+ * [Unifi](Unifi.md)
