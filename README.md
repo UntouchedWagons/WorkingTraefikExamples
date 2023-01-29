@@ -74,3 +74,7 @@ This is my working Traefik setup
 ```
 
 Give Traefik a minute to get a certificate and set up routes. Then go to `https://dashboard.docker.YOUR_DOMAIN_NAME.COM` in your web browser and you should get the Traefik dashboard using the SSL certificate provided by Let's Encrypt!
+
+## Container examples
+
+ * [Portainer](Portainer.md)
