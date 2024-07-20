@@ -12,51 +12,52 @@ These examples assume you're already familiar with Let's Encrypt, Docker and Doc
 
 ## Getting started
 
-This is my working Traefik setup
+This is my working Traefik setup. This has been tested to work with Traefik 3.1.0
 
-    version: '3'
-
-    services:
-      traefik:
-        image: public.ecr.aws/docker/library/traefik:latest
-        container_name: "traefik"
-        restart: unless-stopped
-        command:
-          #- --log.level=DEBUG
-          - --api.insecure=true
-          - --api.dashboard=true
-          - --providers.docker=true
-          - --providers.docker.exposedbydefault=false
-          - --entrypoints.web.address=:80
-          - --entrypoints.websecure.address=:443
-          - --entrypoints.web.http.redirections.entryPoint.to=websecure
-          - --entrypoints.web.http.redirections.entryPoint.scheme=https
-          - --entrypoints.web.http.redirections.entrypoint.permanent=true
-          - --entrypoints.websecure.http.tls.domains[0].main=docker.YOUR_DOMAIN_NAME.COM
-          - --entrypoints.websecure.http.tls.domains[0].sans=*.docker.YOUR_DOMAIN_NAME.COM
-          - --entrypoints.websecure.http.tls.certresolver=myresolver
-          - --certificatesresolvers.myresolver.acme.dnschallenge=true
-          - --certificatesresolvers.myresolver.acme.dnschallenge.provider=cloudflare
-          - --certificatesresolvers.myresolver.acme.email=YOUR_EMAIL_ADDRESS@GMAIL.COM
-          - --certificatesresolvers.myresolver.acme.storage=/etc/traefik/acme.json
-          - --serverstransport.insecureskipverify=true
-        ports:
-          - 80:80
-          - 443:443
-        labels:
-          - "traefik.enable=true"
-          - "traefik.http.routers.dashboard.rule=Host(`dashboard.docker.YOUR_DOMAIN_NAME.COM`)"
-          - "traefik.http.routers.api.service=api@internal"
-          - "traefik.http.services.dashboard.loadbalancer.server.port=8080"
-          - "traefik.http.routers.dashboard.tls=true"
-        environment:
-          - PUID=1000
-          - PGID=1000
-          - TZ=America/Toronto
-          - CF_DNS_API_TOKEN=YOUR_CLOUDFLARE_DNS_TOKEN
-        volumes:
-          - ./appdata/traefik:/etc/traefik
-          - /var/run/docker.sock:/var/run/docker.sock:ro
+```yaml
+services:
+  traefik:
+    image: public.ecr.aws/docker/library/traefik:latest
+    container_name: "traefik"
+    restart: unless-stopped
+    command:
+      #- --log.level=DEBUG
+      - --api.insecure=true
+      - --api.dashboard=true
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --entrypoints.web.address=:80
+      - --entrypoints.websecure.address=:443
+      - --entrypoints.web.http.redirections.entryPoint.to=websecure
+      - --entrypoints.web.http.redirections.entryPoint.scheme=https
+      - --entrypoints.web.http.redirections.entrypoint.permanent=true
+      - --entrypoints.websecure.http.tls.domains[0].main=docker.YOUR_DOMAIN_NAME.COM
+      - --entrypoints.websecure.http.tls.domains[0].sans=*.docker.YOUR_DOMAIN_NAME.COM
+      - --entrypoints.websecure.http.tls.certresolver=myresolver
+      - --certificatesresolvers.myresolver.acme.dnschallenge=true
+      - --certificatesresolvers.myresolver.acme.dnschallenge.provider=cloudflare
+      - --certificatesresolvers.myresolver.acme.dnschallenge.resolvers=9.9.9.9:53
+      - --certificatesresolvers.myresolver.acme.email=YOUR_EMAIL_ADDRESS@GMAIL.COM
+      - --certificatesresolvers.myresolver.acme.storage=/etc/traefik/acme.json
+      - --serverstransport.insecureskipverify=true
+    ports:
+      - 80:80
+      - 443:443
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.dashboard.rule=Host(`dashboard.docker.YOUR_DOMAIN_NAME.COM`)"
+      - "traefik.http.routers.api.service=api@internal"
+      - "traefik.http.services.dashboard.loadbalancer.server.port=8080"
+      - "traefik.http.routers.dashboard.tls=true"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Toronto
+      - CF_DNS_API_TOKEN=YOUR_CLOUDFLARE_DNS_TOKEN
+    volumes:
+      - ./appdata/traefik:/etc/traefik
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+```
   
   Some things to note in this example: 
   
