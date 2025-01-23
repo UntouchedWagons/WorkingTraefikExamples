@@ -15,10 +15,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - portainer-data:/data
-    networks:
-      - default
-      - traefik_default
+      - portainer:/data
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.portainer.rule=Host(`portainer.docker.YOUR_DOMAIN_NAME.COM`)"
@@ -27,12 +24,7 @@ services:
       - "traefik.http.services.portainer.loadbalancer.server.port=9000"
 
 volumes:
-  portainer-data:
-
-networks:
-  default:
-  traefik_default:
-    external: true
+  portainer:
 ```
 
 ## Pressing "Go"

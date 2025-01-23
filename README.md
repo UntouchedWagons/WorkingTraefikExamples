@@ -78,6 +78,4 @@ Give Traefik a minute to get a certificate and set up routes. Then go to `https:
 
 ## Container examples
 
- * [Portainer](Portainer.md)
- * [Omada](Omada.md)
- * [Unifi](Unifi.md)
+For examples of how to make other containers available through Traefik please check the examples folder.
