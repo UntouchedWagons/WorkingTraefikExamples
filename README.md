@@ -17,7 +17,7 @@ This is my working Traefik setup. This has been tested to work with Traefik 3.1.
 ```yaml
 services:
   traefik:
-    image: public.ecr.aws/docker/library/traefik:latest
+    image: traefik:v3
     container_name: "traefik"
     restart: unless-stopped
     command:
@@ -50,13 +50,14 @@ services:
       - "traefik.http.services.dashboard.loadbalancer.server.port=8080"
       - "traefik.http.routers.dashboard.tls=true"
     environment:
-      - PUID=1000
-      - PGID=1000
       - TZ=America/Toronto
       - CF_DNS_API_TOKEN=YOUR_CLOUDFLARE_DNS_TOKEN
     volumes:
-      - ./appdata/traefik:/etc/traefik
+      - traefik:/etc/traefik
       - /var/run/docker.sock:/var/run/docker.sock:ro
+
+volumes:
+  traefik:
 ```
   
   Some things to note in this example: 
@@ -65,7 +66,6 @@ services:
    * Enter your email address where it says `YOUR_EMAIL_ADDRESS@GMAIL.COM` 
    * Enter the token you got from Cloudflare where it says `YOUR_CLOUDFLARE_DNS_TOKEN`
    * Edit the timezone to match your area (The author is unsure what this actually affects)
-   * Edit the PUID and PGID if needed. Docker containers should not run as root unless they absolutely have to, Traefik is not such a container. 1000:1000 is the UID:GID of the user I use to log into my docker VM
    
 ## Pressing "Go"
 
