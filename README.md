@@ -70,7 +70,6 @@ volumes:
 ## Pressing "Go"
 
 ```
-# mkdir -p ./appdata/traefik
 # docker compose up -d
 ```
 
