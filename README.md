@@ -39,6 +39,7 @@ services:
       - --certificatesresolvers.myresolver.acme.dnschallenge.resolvers=9.9.9.9:53
       - --certificatesresolvers.myresolver.acme.email=YOUR_EMAIL_ADDRESS@GMAIL.COM
       - --certificatesresolvers.myresolver.acme.storage=/etc/traefik/acme.json
+      # - --certificatesresolvers.myresolver.acme.caServer=https://acme-staging-v02.api.letsencrypt.org/directory # Uncomment to use staging environment (Good for testing)
       - --serverstransport.insecureskipverify=true
     ports:
       - 80:80
