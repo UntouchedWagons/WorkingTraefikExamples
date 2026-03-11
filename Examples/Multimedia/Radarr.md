@@ -7,7 +7,7 @@ Radarr is a web app for managing and downloading movies.
 ```yaml
 services:
   radarr:
-    image: ghcr.io/onedr0p/radarr:5
+    image: ghcr.io/home-operations/radarr:6
     container_name: radarr
     restart: unless-stopped
     user: 1000:1000

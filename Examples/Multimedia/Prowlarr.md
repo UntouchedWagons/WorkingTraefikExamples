@@ -7,7 +7,7 @@ Prowlarr is a web app for synchronizing torrent trackers and Usenet indexers in 
 ```yaml
 services:
   prowlarr:
-    image: ghcr.io/onedr0p/prowlarr:1
+    image: ghcr.io/home-operations/prowlarr:2
     container_name: prowlarr
     restart: unless-stopped
     user: 1000:1000

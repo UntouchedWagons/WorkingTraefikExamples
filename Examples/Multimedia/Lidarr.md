@@ -7,7 +7,7 @@ Lidarr is a web app for managing and downloading music.
 ```yaml
 services:
   lidarr:
-    image: ghcr.io/onedr0p/lidarr:2
+    image: ghcr.io/home-operations/lidarr:3
     container_name: lidarr
     restart: unless-stopped
     user: 1000:1000

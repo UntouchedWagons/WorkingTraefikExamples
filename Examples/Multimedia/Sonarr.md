@@ -7,7 +7,7 @@ Sonarr is a web app for managing and downloading movies.
 ```yaml
 services:
   sonarr:
-    image: ghcr.io/onedr0p/sonarr:5
+    image: ghcr.io/home-operations/sonarr:4
     container_name: sonarr
     restart: unless-stopped
     user: 1000:1000
